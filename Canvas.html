@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600">
+
+    </canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var contexto = canvas.getContext('2d');
+        var altura = 30, largura = 30;
+        var x = 10, y = 30;
+
+        function desenhar() {
+            contexto.fillRect(x, y, largura, altura);
+        }
+
+        document.addEventListener("keydown", function (e) {
+            //-- 38 CIMA
+            //-- 39 Direita
+            //-- 40 Baixo
+            //-- 37 Esquerda
+            console.log(e.keyCode);
+            contexto.clearRect(x, y, largura, altura);
+            switch (e.keyCode) {
+                case 38:
+                    y -= 5;
+                    break;
+                case 40:
+                    y += 5;
+                    break;
+                case 39:
+                    x += 5;
+                    break;
+                case 37:
+                    x -= 5;
+                    break;
+                case 32:
+                    tiro(x+30);
+                    break;
+            }
+            desenhar();
+
+
+        })
+
+        var yTiro, xTiro=x + 15 ;
+        var tTiro = xTiro;
+        var limpaTiro = tTiro;
+        function tiro() {
+            setInterval(function () {
+                limpaTiro = tTiro;
+                tTiro += 5
+                
+                contexto.clearRect(limpaTiro-5, y + 30, 5, 5);
+                desenharTiro(tTiro);
+               
+            }, 100);
+        }
+        function desenharTiro(xNovo) {
+            contexto.fillRect(xNovo, y, 5, 5);
+        }
+            desenhar();
+
+    </script>
+</body>
+</html>
